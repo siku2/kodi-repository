@@ -11,7 +11,7 @@ exit_with_error() {
 
 is_python38() {
   local result
-  result=$("$1" -c "import sys; print(sys.version_info > (3, 8, 0))" 2>&1)
+  result=$("$1" -c "import sys; print(sys.version_info >= (3, 8, 0))" 2>&1)
   [[ "$result" == "True" ]]
   return
 }
