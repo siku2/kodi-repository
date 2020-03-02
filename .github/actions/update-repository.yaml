@@ -1,0 +1,24 @@
+name: Update Repository
+on: repository_dispatch
+
+jobs:
+  update-repository:
+    name: Update Repository
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Update Repository
+      run: tools/update-repository.sh
+      env:
+        GITHUBTOKEN: ${{ github.token }}
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v2
+      commit-message: update repository
+      title: Updated Repository
+      body: |
+        Automatically updated the repository to include the latest versions.
+      with:
+        token: ${{ github.token }}

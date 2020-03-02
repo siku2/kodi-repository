@@ -1,0 +1,6 @@
+addons:
+- id: repository.siku2
+  local: local_addons/repository.siku2
+
+- id: script.service.sponsorblock
+  repo: siku2/script.service.sponsorblock

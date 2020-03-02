@@ -1,0 +1,39 @@
+<addons>
+    <addon id="repository.siku2" name="siku2's Repository" version="1.0.0" provider-name="siku2">
+    <extension point="xbmc.addon.repository">
+        <info>https://siku2.io/kodi-repository/addons/addons.xml</info>
+        <checksum>https://siku2.io/kodi-repository/addons/addons.xml.md5</checksum>
+        <datadir>https://siku2.io/kodi-repository/addons</datadir>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">siku2's Kodi add-on repository</summary>
+        <description lang="en_GB">Contains all add-ons created by siku2.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <website>https://siku2.io/kodi-repository</website>
+    </extension>
+</addon><addon id="script.service.sponsorblock" version="0.0.1" name="SponsorBlock" provider-name="siku2">
+    <requires>
+        <import addon="xbmc.python" version="2.26.0" />
+        <import addon="script.module.requests" version="2.22.0" />
+        <import addon="script.module.six" version="1.13.0" />
+        <import addon="plugin.video.youtube" version="6.7.0" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Skip YouTube in-video sponsors</summary>
+        <description lang="en_GB">
+SponsorBlock is a crowdsourced project to skip sponsor segments in YouTube videos.
+Users submit when a sponsor happens and the add-on automatically skips sponsors it knows about.
+        </description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <source>https://github.com/siku2/script.service.sponsorblock</source>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+    </extension>
+</addon></addons>
