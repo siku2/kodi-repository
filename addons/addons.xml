@@ -11,6 +11,9 @@
         <platform>all</platform>
         <license>MIT</license>
         <website>https://siku2.io/kodi-repository</website>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
     </extension>
 </addon><addon id="script.service.sponsorblock" version="0.0.1" name="SponsorBlock" provider-name="siku2">
     <requires>

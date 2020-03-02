@@ -1,0 +1,33 @@
+# metadata
+title: siku2's repository
+author: siku2
+description: Kodi addon repository
+github: siku2/kodi-repository
+baseurl: /kodi-repository/
+url: https://siku2.io
+
+permalink: /:title
+
+theme: jekyll-theme-tactile
+
+plugins:
+# github plugins
+- jekyll-coffeescript
+- jekyll-default-layout
+- jekyll-gist
+- jekyll-github-metadata
+- jekyll-optional-front-matter
+- jekyll-paginate
+- jekyll-readme-index
+- jekyll-relative-links
+- jekyll-titles-from-headings
+
+exclude:
+- .idea
+- local_addons
+- tools
+- venv
+- Gemfile
+- Gemfile.lock
+- LICENSE
+- README.md

@@ -12,5 +12,8 @@
         <platform>all</platform>
         <license>MIT</license>
         <website>https://siku2.io/kodi-repository</website>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
     </extension>
 </addon>

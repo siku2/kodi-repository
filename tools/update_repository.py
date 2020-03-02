@@ -372,7 +372,7 @@ def update_addons_xml(ctx: Context) -> None:
 
 
 def load_config() -> Config:
-    konfi.set_sources(konfi.FileLoader("config.yaml"), konfi.Env(decoder="yaml"))
+    konfi.set_sources(konfi.FileLoader("repo.yaml"), konfi.Env(decoder="yaml"))
     return konfi.load(Config)
 
 
