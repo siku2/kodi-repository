@@ -1,2 +1,4 @@
 .idea/
 venv/
+
+Gemfile.lock
