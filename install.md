@@ -1,5 +1,5 @@
 ---
-title: How to install
+title: Installation Guide
 ---
 
 Once you have installed the repository you'll be able to install all addons and receive automatic updates.
