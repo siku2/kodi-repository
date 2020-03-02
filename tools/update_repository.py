@@ -343,6 +343,7 @@ def update_addons_xml(ctx: Context) -> None:
     addon_xmls = ctx.addon_xmls
     if not addon_xmls:
         logger.debug("no need to update addons.xml")
+        return
 
     logger.info("updating addons.xml")
     path = ctx.config.output_dir / "addons.xml"
