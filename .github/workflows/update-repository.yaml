@@ -1,5 +1,7 @@
 name: Update Repository
-on: repository_dispatch
+on:
+  repository_dispatch:
+    types: [trigger-update]
 
 jobs:
   update-repository:
@@ -16,9 +18,9 @@ jobs:
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v2
-      commit-message: update repository
-      title: Updated Repository
-      body: |
-        Automatically updated the repository to include the latest versions.
       with:
         token: ${{ github.token }}
+        commit-message: update repository
+        title: Updated Repository
+        body: |
+          Automatically updated the repository to include the latest versions.
