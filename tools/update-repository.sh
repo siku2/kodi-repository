@@ -11,13 +11,13 @@ exit_with_error() {
 
 is_python38() {
   local result
-  result=$("$1" -c "import sys; print(sys.version_info > (3, 8, 0))")
+  result=$("$1" -c "import sys; print(sys.version_info > (3, 8, 0))" 2>&1)
   [[ "$result" == "True" ]]
   return
 }
 
 find_python38() {
-  for exec in "python" "python3" "python38"; do
+  for exec in "python" "python3" "python38" "python3.8"; do
     if is_python38 $exec; then
       echo "$exec"
       return 0
