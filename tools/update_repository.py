@@ -152,14 +152,13 @@ class BaseAddon(abc.ABC):
 
         if assets := metadata.find("./assets"):
             assets = cast(ET.Element, assets)
-            if (icon := assets.find("./icon")) is not None:
-                log.debug("extracting icon")
-                p = Path(icon.text)
-                _copy_file_from_zip(addon_path / p, path_in_repo / f"icon{p.suffix}")
-            if (fanart := assets.find("./fanart")) is not None:
-                log.debug("extracting fanart")
-                p = Path(fanart.text)
-                _copy_file_from_zip(addon_path / p, path_in_repo / f"fanart{p.suffix}")
+            for asset_el in assets:
+                asset_el = cast(ET.Element, asset_el)
+                p = Path(asset_el.text)
+                log.debug("extracting %s", p.name)
+                target_path = path_in_repo / p
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                _copy_file_from_zip(addon_path / p, target_path)
         else:
             log.info("no assets to unpack")
 
@@ -216,9 +215,9 @@ class LocalAddon(BaseAddon):
         download_path = self.version_path(ctx, version)
         if download_path.exists():
             raise ValueError(f"version {version} already downloaded")
+        download_path.parent.mkdir(exist_ok=True)
 
         parent = self.local.parent
-
         with zipfile.ZipFile(download_path, "w") as zfp:
             for p in self.local.rglob("*"):
                 name = str(p.relative_to(parent))
@@ -266,9 +265,9 @@ class GitHubAddon(BaseAddon):
         download_path = self.version_path(ctx, version)
         if download_path.exists():
             raise ValueError(f"version {version} already downloaded")
+        download_path.parent.mkdir(exist_ok=True)
 
         expected_asset_name = f"{self.id}-{version}.zip"
-
         release = self._releases(ctx)[version]
         for asset in release.get_assets():  # type: GitReleaseAsset
             if asset.name == expected_asset_name:
@@ -277,7 +276,7 @@ class GitHubAddon(BaseAddon):
         else:
             raise LookupError("no asset found")
 
-        with open(str(download_path), "wb") as fp:
+        with download_path.open("wb") as fp:
             download_to_file(fp, addon_asset.browser_download_url)
 
 
@@ -387,6 +386,8 @@ def setup_logging():
 def main():
     config = load_config()
     ctx = Context(config, Github(config.github_token))
+
+    config.output_dir.mkdir(exist_ok=True)
 
     logger.info("updating %s addons", len(config.addons))
     handles = []
