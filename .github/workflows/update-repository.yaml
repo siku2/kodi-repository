@@ -25,6 +25,6 @@ jobs:
       with:
         token: ${{ github.token }}
         commit-message: update repository
-        title: Updated Repository
+        title: Update Repository
         body: |
           Automatically updated the repository to include the latest versions.
