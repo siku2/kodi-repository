@@ -1,0 +1,2 @@
+- Drop dependency on YouTube 6.7.0
+- Add option for "Sponsor Skip Count Tracking"
