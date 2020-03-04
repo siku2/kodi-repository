@@ -1,0 +1,8 @@
+[0.1.1]
+- Added option to automatically upvote a sponsor segment
+- Fix Kodi's player reporting an inaccurate time after seeking.
+- Fix "Sponsor Skip Count Tracking" reporting
+
+[0.1.0]
+- Drop dependency on YouTube 6.7.0
+- Add option for "Sponsor Skip Count Tracking"
