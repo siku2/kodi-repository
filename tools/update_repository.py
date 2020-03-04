@@ -9,7 +9,7 @@ import sys
 import threading
 import zipfile
 from pathlib import Path
-from typing import Any, BinaryIO, Dict, List, Optional, Union, cast, Callable, TypeVar, IO, Type, Tuple
+from typing import Any, BinaryIO, Callable, Dict, IO, List, Optional, Tuple, Type, TypeVar, Union, cast
 from xml.etree import ElementTree as ET
 
 import konfi
@@ -127,7 +127,7 @@ class BaseAddon(abc.ABC):
     def setup_version(self, ctx: "Context", version: str) -> None:
         log = self.logger
 
-        log.info("setting version %s", version)
+        log.info("unpacking version %s", version)
         addon_path = zipfile.Path(self.version_path(ctx, version)) / self.id
         addon_xml_path = addon_path / "addon.xml"
         with addon_xml_path.open() as zfp:
@@ -390,16 +390,29 @@ def main():
 
     config.output_dir.mkdir(exist_ok=True)
 
-    logger.info("updating %s addons", len(config.addons))
+    all_ok = True
+
+    def addon_update(_addon: BaseAddon) -> None:
+        try:
+            _addon.update(ctx)
+        except BaseException:
+            nonlocal all_ok
+            all_ok = False
+            logger.exception("failed to update addon: %s", _addon.id)
+
     handles = []
+    logger.info("updating %s addons", len(config.addons))
     for addon in config.addons:
-        th = threading.Thread(target=addon.update, args=(ctx,))
+        th = threading.Thread(target=addon_update, args=(addon,))
         th.start()
         handles.append(th)
 
     logger.debug("waiting for all addons to complete")
     for th in handles:
         th.join()
+
+    if not all_ok:
+        sys.exit("error: not all addons were updated successfully")
 
     update_addons_xml(ctx)
 

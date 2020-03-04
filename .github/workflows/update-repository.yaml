@@ -24,6 +24,7 @@ jobs:
       uses: peter-evans/create-pull-request@v2
       with:
         token: ${{ github.token }}
+        branch: update-repo
         commit-message: update repository
         title: Update Repository
         body: |
