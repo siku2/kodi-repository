@@ -15,7 +15,7 @@
             <icon>icon.png</icon>
         </assets>
     </extension>
-</addon><addon id="script.service.sponsorblock" version="0.2.0" name="SponsorBlock" provider-name="siku2">
+</addon><addon id="script.service.sponsorblock" version="0.2.1" name="SponsorBlock" provider-name="siku2">
     <requires>
         <import addon="xbmc.python" version="2.23.0" />
         <import addon="script.module.requests" version="2.15.1" />
@@ -44,6 +44,10 @@ Users submit when a sponsor happens and the add-on automatically skips sponsors 
         </description>
         <disclaimer lang="en_GB">This is an unoffical port of the SponsorBlock browser extension</disclaimer>
         <news>
+[0.2.1]
+- Fixed "Playback fails with sponsor section at video start" (#12)
+- Added German translation (@NettoHikari, #9)
+
 [0.2.0]
 - Support for SponsorBlock categories
 - Option to disable SponsorBlock for unlisted videos.
