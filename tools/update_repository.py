@@ -81,7 +81,7 @@ def _io_copy(reader: IO[T], writer: IO[T]) -> None:
 
 def _copy_file_from_zip(zfp: zipfile.Path, p: Path) -> None:
     with p.open("wb") as writer:
-        with zfp.open("r") as reader:
+        with zfp.open("rb") as reader:
             _io_copy(reader, writer)
 
 
