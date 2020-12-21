@@ -1,0 +1,22 @@
+[0.2.4]
+- Handle all events which indicate that playback has ended
+- Handle local files gracefully
+
+[0.2.3]
+- Bumped Kodi version to 18 (Leia) to use `onAVStarted` which should hopefully fix issues
+  with segments starting right at the beginning of a video.
+
+[0.2.2]
+- Fixed "Playback fails with sponsor section at video start" again.
+  Let's hope it worked this time :) (bclindner, #14)
+
+[0.2.1]
+- Fixed "Playback fails with sponsor section at video start" (#12)
+- Added German translation (NettoHikari, #9)
+
+[0.2.0]
+- Support for SponsorBlock categories
+- Option to disable SponsorBlock for unlisted videos.
+- Added context menu entry to the YouTube plugin for SponsorBlock
+- Preload skip segments to catch sponsors at the start of a video
+- Fixed the bug which causes a video to keep playing even after the video ended
