@@ -15,7 +15,7 @@
             <icon>icon.png</icon>
         </assets>
     </extension>
-</addon><addon id="script.service.sponsorblock" version="0.2.4" name="SponsorBlock" provider-name="siku2">
+</addon><addon id="script.service.sponsorblock" version="0.2.5" name="SponsorBlock" provider-name="siku2">
     <requires>
         <import addon="xbmc.python" version="2.26.0" />
         <import addon="script.module.requests" version="2.15.1" />
@@ -44,6 +44,10 @@ Users submit when a sponsor happens and the add-on automatically skips sponsors 
         </description>
         <disclaimer lang="en_GB">This is an unoffical port of the SponsorBlock browser extension</disclaimer>
         <news>
+[0.2.5]
+- Sort received segments by start time (macearl, #18)
+- Skip all overlapping segments instead of just skipping the first one
+
 [0.2.4]
 - Handle all events which indicate that playback has ended
 - Handle local files gracefully
