@@ -1,0 +1,2 @@
+- Fix an issue with the YouTube thumbnail URL detection (issue #26)
+- No longer try to play the next item in the playlist if it's the last one (issue #22)
