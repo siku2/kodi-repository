@@ -290,6 +290,7 @@ class GitHubAddon(BaseAddon):
         expected_asset_name = f"{self.id}-{version}.zip"
         release = self._releases(ctx)[version]
         for asset in release.get_assets():  # type: GitReleaseAsset
+            print(asset)
             if asset.name == expected_asset_name:
                 addon_asset = asset
                 break
