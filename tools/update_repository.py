@@ -9,7 +9,20 @@ import sys
 import threading
 import zipfile
 from pathlib import Path
-from typing import Any, BinaryIO, Callable, Dict, IO, List, Optional, Tuple, Type, TypeVar, Union, cast
+from typing import (
+    IO,
+    Any,
+    BinaryIO,
+    Callable,
+    Dict,
+    List,
+    Optional,
+    Tuple,
+    Type,
+    TypeVar,
+    Union,
+    cast,
+)
 from xml.etree import ElementTree as ET
 
 import konfi
@@ -62,7 +75,9 @@ class _PrefixLogger(logging.Logger):
         self.__prefix = prefix
 
     def _log(self, level, msg, args, exc_info=None, extra=None, stack_info=False):
-        return super()._log(level, self.__prefix + msg, args, exc_info, extra, stack_info)
+        return super()._log(
+            level, self.__prefix + msg, args, exc_info, extra, stack_info
+        )
 
 
 ADDON_METADATA_XPATH = r"""./extension[@point="xbmc.addon.metadata"]"""
@@ -124,12 +139,10 @@ class BaseAddon(abc.ABC):
         return versions
 
     @abc.abstractmethod
-    def remote_versions(self, ctx: "Context") -> List[str]:
-        ...
+    def remote_versions(self, ctx: "Context") -> List[str]: ...
 
     @abc.abstractmethod
-    def download_version(self, ctx: "Context", version: str) -> None:
-        ...
+    def download_version(self, ctx: "Context", version: str) -> None: ...
 
     def setup_version(self, ctx: "Context", version: str) -> None:
         log = self.logger
@@ -311,7 +324,9 @@ class Context:
             return v
 
 
-def _io_func_writer(writer: Callable[[T], int], *, cls: Type[io.IOBase] = io.BufferedIOBase) -> IO[T]:
+def _io_func_writer(
+    writer: Callable[[T], int], *, cls: Type[io.IOBase] = io.BufferedIOBase
+) -> IO[T]:
     f = cls()
     f.writable = lambda: True
     f.write = writer
@@ -332,7 +347,9 @@ def _get_addons_xml(path: Path) -> Tuple[ET.ElementTree, ET.Element]:
         root = ET.Element("addons")
         tree._setroot(root)
     elif root.tag != "addons":
-        raise ValueError(f"addons.xml has invalid root. Expected <addons>, got <{root.tag}>")
+        raise ValueError(
+            f"addons.xml has invalid root. Expected <addons>, got <{root.tag}>"
+        )
 
     return tree, root
 
@@ -359,7 +376,7 @@ def update_addons_xml(ctx: Context) -> None:
     for addon_xml in addon_xmls:
         addon_id: str = addon_xml.attrib["id"]
 
-        if (existing := addons_el.find(f"./addon[@id=\"{addon_id}\"]")) is not None:
+        if (existing := addons_el.find(f'./addon[@id="{addon_id}"]')) is not None:
             existing = cast(ET.Element, existing)
             logger.debug("replacing existing addon data for: %s", addon_id)
             _replace_xml_element(existing, addon_xml)
@@ -368,6 +385,7 @@ def update_addons_xml(ctx: Context) -> None:
 
     hasher = hashlib.md5()
     with path.open("wb") as fp:
+
         def write(s: bytes) -> int:
             hasher.update(s)
             return fp.write(s)
@@ -385,7 +403,9 @@ def load_config() -> Config:
 
 def setup_logging():
     handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter("{name:^25} | {levelname:>6}: {message}", style="{"))
+    handler.setFormatter(
+        logging.Formatter("{name:^25} | {levelname:>6}: {message}", style="{")
+    )
 
     logger.setLevel(logging.DEBUG)
     logger.addHandler(handler)
