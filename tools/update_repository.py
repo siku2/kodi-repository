@@ -25,11 +25,11 @@ from typing import (
 )
 from xml.etree import ElementTree as ET
 
+import github
 import konfi
 import requests
 from github import Github
 from github.GitRelease import GitRelease
-from github.GitReleaseAsset import GitReleaseAsset
 from github.Repository import Repository
 
 logger = logging.getLogger("update_repository")
@@ -413,7 +413,7 @@ def setup_logging():
 
 def main():
     config = load_config()
-    ctx = Context(config, Github(config.github_token))
+    ctx = Context(config, Github(auth=github.Auth.Token(config.github_token)))
 
     config.output_dir.mkdir(exist_ok=True)
 
